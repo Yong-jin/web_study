@@ -8,5 +8,8 @@
 </head>
 <body>
 	<h1>quiz main</h1>
+	
+	${data1}
+	${data2}
 </body>
 </html>
