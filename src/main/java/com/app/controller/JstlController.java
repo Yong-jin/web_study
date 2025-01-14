@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.dto.DrinkItem;
+import com.app.dto.Member;
 
 @Controller
 public class JstlController {
@@ -59,6 +61,93 @@ public class JstlController {
 		
 		return "jstl/jstl2";
 	}
+	
+	
+	//  /jstl/listTest?type=str
+	//  /jstl/listTest?type=member
+	@GetMapping("/jstl/listTest")
+	public String listTest(@RequestParam String type, Model model) {
+		
+		//  /jstl/listTest?type=str
+		//  /jstl/listTest?type=member
+		
+		//1) 전부 화면에 전달
+		/*
+		model.addAttribute("type", type);
+		
+		model.addAttribute("msg", "스트링 리스트입니다.");
+		
+		List<String> msgList = new ArrayList<String>();
+		for(int i=1; i<=15; i++)
+			msgList.add("스트링 리스트입니다.");
+		
+		model.addAttribute("msgList", msgList);
+		
+		
+		List<Member> memberList = new ArrayList<Member>();
+		
+		for(int i=1; i<=5; i++) {
+			memberList.add(new Member("아이디"+i, "비번"+i, "이름"+i));
+		}
+		
+		model.addAttribute("memberList", memberList);
+		*/
+		
+		//2) 각 type 파라미터에 따라 경우에 맞는 작업만 수행
+		/*
+		model.addAttribute("type", type);
+		
+		if(type.equals("str")) {
+			model.addAttribute("msg", "스트링 리스트입니다.");
+			
+			List<String> msgList = new ArrayList<String>();
+			for(int i=1; i<=15; i++)
+				msgList.add("스트링 리스트입니다.");
+			
+			model.addAttribute("msgList", msgList);
+		}
+		
+		if(type.equals("member")) {
+			List<Member> memberList = new ArrayList<Member>();
+			
+			for(int i=1; i<=5; i++) {
+				memberList.add(new Member("아이디"+i, "비번"+i, "이름"+i));
+			}
+			
+			model.addAttribute("memberList", memberList);
+		}
+		
+		
+		return "jstl/listTest";
+		*/
+		
+		//3) type별로 아예 페이지 자체를 나누어처리 하는 경우
+		if(type.equals("str")) {
+			model.addAttribute("msg", "스트링 리스트입니다.");
+			
+			List<String> msgList = new ArrayList<String>();
+			for(int i=1; i<=15; i++)
+				msgList.add("스트링 리스트입니다.");
+			
+			model.addAttribute("msgList", msgList);
+			
+			return "jstl/str";
+		} else {		
+		//if(type.equals("member")) {
+			List<Member> memberList = new ArrayList<Member>();
+			
+			for(int i=1; i<=5; i++) {
+				memberList.add(new Member("아이디"+i, "비번"+i, "이름"+i));
+			}
+			
+			model.addAttribute("memberList", memberList);
+			
+			return "jstl/member";
+		}
+		
+		//return "jstl/listTest"; //잘못 접근 시 보여줄 페이지
+	}
+	
 	
 }
 
