@@ -23,8 +23,9 @@ public class RoomDAOImpl implements RoomDAO {
 		
 		System.out.println("RoomDAO 호출 됨");
 		//db 연결 조회
+		List<Room> roomList = sqlSessionTemplate.selectList("room_mapper.findRoomList");
 		
-		return null;
+		return roomList;
 	}
 
 	@Override
