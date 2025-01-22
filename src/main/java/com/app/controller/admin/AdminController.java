@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.app.common.CommonCode;
 import com.app.dto.room.Room;
 import com.app.dto.user.User;
 import com.app.service.room.RoomService;
@@ -115,7 +116,7 @@ public class AdminController {
 	public String addUserAction(User user) {
 		//사용자 추가 (관리자X)
 		
-		user.setUserType("CUS");
+		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
 		int result = userService.saveUser(user);
 		//int result = userService.saveCustomerUser(user);
 		System.out.println("사용자 추가 처리 결과 : " + result);
